@@ -16,11 +16,11 @@ public class WheelUnity {
 
     public void right(){
         left.forward();
-        right.stop();
+        right.back();
     }
 
     public void left(){
-        left.stop();
+        left.back();
         right.forward();
     }
     public void back(){
