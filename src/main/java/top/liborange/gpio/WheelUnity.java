@@ -27,4 +27,8 @@ public class WheelUnity {
         left.back();
         right.back();
     }
+    public void stop(){
+        left.stop();
+        right.stop();
+    }
 }

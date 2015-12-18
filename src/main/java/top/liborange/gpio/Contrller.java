@@ -17,24 +17,28 @@ public class Contrller {
             switch (command){
                 case 'f':
                 case 'w':
+                    System.out.println(command);
                     wheels.forward();
                     break;
                 case 'b':
                 case 's':
+                    System.out.println(command);
                     wheels.back();
                     break;
                 case 'l':
                 case 'a':
+                    System.out.println(command);
                     wheels.left();
                     break;
                 case 'r':
                 case 'd':
+                    System.out.println(command);
                     wheels.right();
                     break;
                 case 'e':
-                    flag = false;
-                    break;
                 default:
+                    wheels.stop();
+                    System.out.println(command);
                     flag = false;
                     break;
             }
