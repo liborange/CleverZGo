@@ -27,6 +27,9 @@ public class RunningMan {
         }
     }
 
+    public void shudown(){
+        gpio.shutdown();
+    }
     public static void main(String[] args) {
         RunningMan Dengchao = new RunningMan();
         Dengchao.run();
