@@ -33,5 +33,6 @@ public class RunningMan {
     public static void main(String[] args) {
         RunningMan Dengchao = new RunningMan();
         Dengchao.run();
+        Dengchao.shudown();
     }
 }
