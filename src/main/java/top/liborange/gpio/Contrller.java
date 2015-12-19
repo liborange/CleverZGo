@@ -58,31 +58,45 @@ public class Contrller {
         WheelUnity wheels = new WheelUnity(0,1,2,3);
         boolean flag = true;
         int basePower = 50;
-        int level = 0;
+        float level = 0.0f;
         System.out.println("PWM model,basePower = "+ basePower);
         System.out.println("RRRReady,Running man ！It's time to show ~~~ Baby Gogogo!");
         while(flag){
             char command = buffReader.readLine().toCharArray()[0];
-            switch (command){
-                case 'f':
+            switch (command) {
+                case 'u':
+                    level -= 0.2;
+                    level %= 0.8;
+                    System.out.println("强度增强,当前左右扭矩差："+ (basePower-(int)(level * basePower)));
+                    break;
+                case 'y':
+                    level += 0.2;
+                    level %= 0.8;
+                    System.out.println("强度减弱,当前左右扭矩差："+ (basePower-(int)(level * basePower)));
+                    break;
+                case 'i':
+                    basePower += 10;
+                    System.out.println("basePower加10，当前为："+basePower);
+                    break;
+                case 'o':
+                    basePower -= 10;
+                    System.out.println("basePower减10，当前为："+basePower);
+                    break;
                 case 'w':
-                    System.out.println("command: "+command+" 小车前进");
+                    System.out.println("command: " + command + " 小车前进");
                     wheels.forward(basePower);
                     break;
-                case 'b':
                 case 's':
-                    System.out.println("command: "+command+" 小车后退");
+                    System.out.println("command: " + command + " 小车后退");
                     wheels.back(basePower);
                     break;
-                case 'l':
                 case 'a':
-                    System.out.println("command: "+command+" 小车左转");
-                    wheels.turnAround(level * basePower,basePower);
+                    System.out.println("command: " + command + " 小车左转");
+                    wheels.turnAround((int)(level * basePower), basePower);
                     break;
-                case 'r':
                 case 'd':
-                    System.out.println("command: "+command+" 小车右转");
-                    wheels.turnAround(basePower, level * basePower);
+                    System.out.println("command: " + command + " 小车右转");
+                    wheels.turnAround(basePower, (int)(level * basePower));
                     break;
                 case 'q':
                     wheels.stop();
@@ -91,7 +105,7 @@ public class Contrller {
                 case 'e':
                 default:
                     wheels.stop();
-                    System.out.println("command: "+command+" 小车停止，退出程序");
+                    System.out.println("command: " + command + " 小车停止，退出程序");
                     flag = false;
                     break;
             }
