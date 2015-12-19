@@ -1,8 +1,6 @@
 package top.liborange.gpio;
 
 import com.pi4j.io.gpio.RaspiPin;
-import sun.plugin2.main.server.WindowsHelper;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
