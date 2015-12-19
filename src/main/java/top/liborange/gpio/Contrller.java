@@ -25,10 +25,10 @@ public class Contrller {
         wheels.back();
         Thread.sleep(2000);
 
-        wheels.left();
+        wheels.right();
         Thread.sleep(4000);
 
-        wheels.right();
+        wheels.left();
         Thread.sleep(4000);
     }
 
@@ -150,6 +150,5 @@ public class Contrller {
             default:
                 break;
         }
-        Contrller.pwm();
     }
 }
