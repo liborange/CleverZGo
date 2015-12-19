@@ -14,8 +14,8 @@ public class Contrller {
     public static void demo() throws InterruptedException {
         WheelUnity wheels = new WheelUnity(RaspiPin.GPIO_00,RaspiPin.GPIO_01,RaspiPin.GPIO_02,RaspiPin.GPIO_03);
 
-        for (int i = 0; i < 3; i++) {
-            System.out.println(i+1);
+        for (int i = 3; i > 0; i--) {
+            System.out.println(i+"秒后启动");
             Thread.sleep(1000);
         }
 
@@ -26,10 +26,10 @@ public class Contrller {
         Thread.sleep(2000);
 
         wheels.left();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
 
         wheels.right();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
     }
 
     public static void normal() throws IOException {
