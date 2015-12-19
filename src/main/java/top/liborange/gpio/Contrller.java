@@ -1,15 +1,38 @@
 package top.liborange.gpio;
 
 import com.pi4j.io.gpio.RaspiPin;
+import sun.plugin2.main.server.WindowsHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Scanner;
 
 /**
  * Created by liborange on 15/12/18.
  */
 public class Contrller {
+
+    public static void demo() throws InterruptedException {
+        WheelUnity wheels = new WheelUnity(RaspiPin.GPIO_00,RaspiPin.GPIO_01,RaspiPin.GPIO_02,RaspiPin.GPIO_03);
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println(i+1);
+            Thread.sleep(1000);
+        }
+
+        wheels.forward();
+        Thread.sleep(2000);
+
+        wheels.back();
+        Thread.sleep(2000);
+
+        wheels.left();
+        Thread.sleep(2000);
+
+        wheels.right();
+        Thread.sleep(2000);
+    }
 
     public static void normal() throws IOException {
         BufferedReader buffReader = new BufferedReader(new InputStreamReader(System.in));
@@ -112,7 +135,23 @@ public class Contrller {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("输入运行模式，1：普通；2：pwm；3：demo");
+        int i = scanner.nextInt();
+        switch (i){
+            case 1:
+                normal();
+                break;
+            case 2:
+                pwm();
+                break;
+            case 3:
+                demo();
+                break;
+            default:
+                break;
+        }
         Contrller.pwm();
     }
 }
