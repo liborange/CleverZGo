@@ -2,19 +2,19 @@ package top.liborange.gpio;
 
 import com.pi4j.io.gpio.*;
 import com.pi4j.wiringpi.SoftPwm;
+import top.liborange.Config;
 
 /**
  * Created by liborange on 15/12/18.
  */
 public class Wheel {
-    public static final GpioController gpio  = GpioFactory.getInstance();
     private GpioPinDigitalOutput forward;
     private GpioPinDigitalOutput backward;
     private int f,b;
     private boolean pwm = false;
     public Wheel(Pin F,Pin B) {
-        forward = gpio.provisionDigitalOutputPin(F, "", PinState.LOW);
-        backward = gpio.provisionDigitalOutputPin(B, "", PinState.LOW);
+        forward = Config.gpio.provisionDigitalOutputPin(F, "", PinState.LOW);
+        backward = Config.gpio.provisionDigitalOutputPin(B, "", PinState.LOW);
     }
 
     public Wheel(int f,int b){
