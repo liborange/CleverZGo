@@ -30,6 +30,8 @@ public class Contrller {
 
         wheels.left();
         Thread.sleep(4000);
+
+        wheels.stop();
     }
 
     public static void normal() throws IOException {
