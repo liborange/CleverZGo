@@ -27,6 +27,7 @@ public class Wheel {
     public void forward(){
         forward.high();
         backward.low();
+        System.out.println(forward.getState()+"\t"+backward.getState());
     }
     public void move(int power){
         if(power>=0) {
