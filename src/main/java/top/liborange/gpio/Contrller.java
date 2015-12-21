@@ -36,7 +36,8 @@ public class Contrller {
 
     public static void normal() throws IOException {
         BufferedReader buffReader = new BufferedReader(new InputStreamReader(System.in));
-        WheelUnity wheels = new WheelUnity(RaspiPin.GPIO_00,RaspiPin.GPIO_01,RaspiPin.GPIO_02,RaspiPin.GPIO_03);
+        WheelUnity wheelHead = new WheelUnity(RaspiPin.GPIO_00,RaspiPin.GPIO_01,RaspiPin.GPIO_02,RaspiPin.GPIO_03);
+        WheelUnity wheelTail = new WheelUnity(RaspiPin.GPIO_24,RaspiPin.GPIO_27, RaspiPin.GPIO_28, RaspiPin.GPIO_29);
         boolean flag = true;
         System.out.println("RRRReady,Running man ！It's time to show ~~~ Baby Gogogo!");
         while(flag){
@@ -45,30 +46,36 @@ public class Contrller {
                 case 'f':
                 case 'w':
                     System.out.println("command: "+command+" 小车前进");
-                    wheels.forward();
+                    wheelHead.forward();
+                    wheelTail.forward();
                     break;
                 case 'b':
                 case 's':
                     System.out.println("command: "+command+" 小车后退");
-                    wheels.back();
+                    wheelHead.back();
+                    wheelTail.back();
                     break;
                 case 'l':
                 case 'a':
                     System.out.println("command: "+command+" 小车左转");
-                    wheels.left();
+                    wheelHead.left();
+                    wheelTail.left();
                     break;
                 case 'r':
                 case 'd':
                     System.out.println("command: "+command+" 小车右转");
-                    wheels.right();
+                    wheelHead.right();
+                    wheelTail.right();
                     break;
                 case 'q':
-                    wheels.stop();
+                    wheelHead.stop();
+                    wheelTail.stop();
                     System.out.println("command: " + command + " 小车停止，等待命令");
                     break;
                 case 'e':
                 default:
-                    wheels.stop();
+                    wheelHead.stop();
+                    wheelTail.stop();
                     System.out.println("command: "+command+" 小车停止，退出程序");
                     flag = false;
                     break;
