@@ -24,38 +24,58 @@ public class Wheel {
         SoftPwm.softPwmCreate(f, 0, 100);
         SoftPwm.softPwmCreate(b, 0, 100);
     }
-    public void forward(){
-        forward.high();
-        backward.low();
-        System.out.println(forward.getState()+"\t"+backward.getState());
-    }
+
+    /**
+     * pwm模式下，通过参数调节车轮，参数【大小】控制转速，参数【正负】控制方向
+     * @param power
+     */
     public void move(int power){
-        if(power>=0) {
-            pwmSetting(power,0);
-        }else {
-            pwmSetting(0,-power);
+        if(pwm) {
+            power %= 100;
+            if (power >= 0) {
+                pwmSetting(power, 0);
+            } else {
+                pwmSetting(0, -power);
+            }
         }
     }
 
-    public void back(){
+    /**
+     * 普通模式下，车轮的前进，后退，停止。
+     * @return
+     */
+    public boolean forward(){
+        forward.high();
+        backward.low();
+        return true;
+    }
+
+    public boolean back(){
         forward.low();
         backward.high();
+        return true;
     }
 
 
-    public void stop(){
+    public boolean stop(){
         if(!pwm) {
             forward.low();
             backward.low();
         }else {
            pwmSetting(0,0);
         }
+        return true;
     }
 
-    public void pwmSetting(int fpower,int bpower){
-        fpower %= 100;
-        bpower %= 100;
-        SoftPwm.softPwmWrite(b, bpower);
-        SoftPwm.softPwmWrite(f, fpower);
+    /**
+     * 参数大于零，输出高电压；小于零，输出低电压。
+     * @param fpower
+     * @param bpower
+     */
+    public void pwmSetting(int fpower,int bpower) {
+        if (pwm) {
+            SoftPwm.softPwmWrite(b, bpower);
+            SoftPwm.softPwmWrite(f, fpower);
+        }
     }
 }

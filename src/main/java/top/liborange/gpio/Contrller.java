@@ -1,6 +1,7 @@
 package top.liborange.gpio;
 
-import com.pi4j.io.gpio.RaspiPin;
+import top.liborange.Config;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,32 +13,31 @@ import java.util.Scanner;
 public class Contrller {
 
     public static void demo() throws InterruptedException {
-        WheelUnity wheels = new WheelUnity(RaspiPin.GPIO_00,RaspiPin.GPIO_01,RaspiPin.GPIO_02,RaspiPin.GPIO_03);
+        WheelUnity wheels = new WheelUnity(Config.Method.normal);
 
         for (int i = 3; i > 0; i--) {
             System.out.println(i+"秒后启动");
             Thread.sleep(1000);
         }
 
-        wheels.forward();
+        wheels.run(Config.CMD.forward);
         Thread.sleep(2000);
 
-        wheels.back();
+        wheels.run(Config.CMD.back);
         Thread.sleep(2000);
 
-        wheels.right();
+        wheels.run(Config.CMD.right);
         Thread.sleep(4000);
 
-        wheels.left();
+        wheels.run(Config.CMD.left);
         Thread.sleep(4000);
 
-        wheels.stop();
+        wheels.run(Config.CMD.stop);
     }
 
     public static void normal() throws IOException {
         BufferedReader buffReader = new BufferedReader(new InputStreamReader(System.in));
-        WheelUnity wheelHead = new WheelUnity(RaspiPin.GPIO_00,RaspiPin.GPIO_01,RaspiPin.GPIO_02,RaspiPin.GPIO_03);
-        WheelUnity wheelTail = new WheelUnity(RaspiPin.GPIO_24,RaspiPin.GPIO_27, RaspiPin.GPIO_28, RaspiPin.GPIO_29);
+        WheelUnity wheels = new WheelUnity(Config.Method.normal);
         boolean flag = true;
         System.out.println("RRRReady,Running man ！It's time to show ~~~ Baby Gogogo!");
         while(flag){
@@ -45,37 +45,31 @@ public class Contrller {
             switch (command){
                 case 'f':
                 case 'w':
-                    System.out.println("command: "+command+" 小车前进");
-                    wheelHead.forward();
-                    wheelTail.forward();
+                    System.out.println("command: " + command + " 小车前进");
+                    wheels.run(Config.CMD.forward);
                     break;
                 case 'b':
                 case 's':
-                    System.out.println("command: "+command+" 小车后退");
-                    wheelHead.back();
-                    wheelTail.back();
+                    System.out.println("command: " + command + " 小车后退");
+                    wheels.run(Config.CMD.back);
                     break;
                 case 'l':
                 case 'a':
-                    System.out.println("command: "+command+" 小车左转");
-                    wheelHead.left();
-                    wheelTail.left();
+                    System.out.println("command: " + command + " 小车左转");
+                    wheels.run(Config.CMD.left);
                     break;
                 case 'r':
                 case 'd':
-                    System.out.println("command: "+command+" 小车右转");
-                    wheelHead.right();
-                    wheelTail.right();
+                    System.out.println("command: " + command + " 小车右转");
+                    wheels.run(Config.CMD.right);
                     break;
                 case 'q':
-                    wheelHead.stop();
-                    wheelTail.stop();
+                    wheels.run(Config.CMD.stop);
                     System.out.println("command: " + command + " 小车停止，等待命令");
                     break;
                 case 'e':
                 default:
-                    wheelHead.stop();
-                    wheelTail.stop();
+                    wheels.run(Config.CMD.stop);
                     System.out.println("command: "+command+" 小车停止，退出程序");
                     flag = false;
                     break;
@@ -85,57 +79,40 @@ public class Contrller {
 
     public static void pwm() throws IOException {
         BufferedReader buffReader = new BufferedReader(new InputStreamReader(System.in));
-        WheelUnity wheels = new WheelUnity(0,1,2,3);
+        WheelUnity wheels = new WheelUnity(Config.Method.pwd);
         boolean flag = true;
-        int basePower = 50;
-        float level = 0.0f;
-        System.out.println("PWM model,basePower = "+ basePower);
-        System.out.println("RRRReady,Running man ！It's time to show ~~~ Baby Gogogo!");
+         System.out.println("RRRReady,Running man ！It's time to show ~~~ Baby Gogogo!");
         while(flag){
             char command = buffReader.readLine().toCharArray()[0];
-            switch (command) {
-                case 'u':
-                    level -= 0.2;
-                    level %= 0.8;
-                    System.out.println("强度增强,当前左右扭矩差："+ (basePower-(int)(level * basePower)));
-                    break;
-                case 'y':
-                    level += 0.2;
-                    level %= 0.8;
-                    System.out.println("强度减弱,当前左右扭矩差："+ (basePower-(int)(level * basePower)));
-                    break;
-                case 'i':
-                    basePower += 10;
-                    System.out.println("basePower加10，当前为："+basePower);
-                    break;
-                case 'o':
-                    basePower -= 10;
-                    System.out.println("basePower减10，当前为："+basePower);
-                    break;
+            switch (command){
+                cxchong
                 case 'w':
                     System.out.println("command: " + command + " 小车前进");
-                    wheels.forward(basePower);
+                    wheels.run(Config.CMD.forward);
                     break;
+                case 'b':
                 case 's':
-                    System.out.println("command: " + command + " 小车后退");
-                    wheels.back(basePower);
+                    System.out.println("command: "+command+" 小车后退");
+                    wheels.run(Config.CMD.back);
                     break;
+                case 'l':
                 case 'a':
-                    System.out.println("command: " + command + " 小车左转");
-                    wheels.turnAround((int)(level * basePower), basePower);
+                    System.out.println("command: "+command+" 小车左转");
+                    wheels.run(Config.CMD.left);
                     break;
+                case 'r':
                 case 'd':
-                    System.out.println("command: " + command + " 小车右转");
-                    wheels.turnAround(basePower, (int)(level * basePower));
+                    System.out.println("command: "+command+" 小车右转");
+                    wheels.run(Config.CMD.right);
                     break;
                 case 'q':
-                    wheels.stop();
+                    wheels.run(Config.CMD.stop);
                     System.out.println("command: " + command + " 小车停止，等待命令");
                     break;
                 case 'e':
                 default:
-                    wheels.stop();
-                    System.out.println("command: " + command + " 小车停止，退出程序");
+                    wheels.run(Config.CMD.stop);
+                    System.out.println("command: "+command+" 小车停止，退出程序");
                     flag = false;
                     break;
             }
