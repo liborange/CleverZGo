@@ -1,6 +1,7 @@
 package top.liborange.gpio;
 
 import com.pi4j.io.gpio.*;
+import com.pi4j.wiringpi.Gpio;
 import com.pi4j.wiringpi.SoftPwm;
 import top.liborange.Config;
 
@@ -21,11 +22,11 @@ public class Wheel {
         this.f = f;
         this.b = b;
         pwm = true;
+        Gpio.wiringPiSetup();
         SoftPwm.softPwmCreate(f, 0, 100);
         SoftPwm.softPwmCreate(b, 0, 100);
-        SoftPwm.softPwmWrite(f, 10);
-        SoftPwm.softPwmWrite(b,10);
-        System.out.println("wheel control pin: "+f+"\t"+b+"methos pwm "+pwm);
+        SoftPwm.softPwmWrite(f, 0);
+        SoftPwm.softPwmWrite(b, 0);
     }
 
     /**
