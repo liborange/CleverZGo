@@ -121,7 +121,7 @@ public class Contrller {
     }
 
     public static void  app() throws Exception {
-        CarUnity car = new CarUnity(Config.Method.pwd);
+        CarUnity car = new CarUnity(Config.Method.normal);
         CmdServiceImpl carService = new CmdServiceImpl(car);
         RpcFramework.export(carService,50001);
     }

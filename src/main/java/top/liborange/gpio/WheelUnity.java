@@ -34,6 +34,7 @@ public class WheelUnity {
     }
 
     public boolean run(Config.CMD cmd){
+        System.out.println("run command"+cmd);
         switch (cmd){
             case forward:
                 turnAround(power,power,power,power);
@@ -86,8 +87,6 @@ public class WheelUnity {
         power = power<10?10:power%100;  //保证power大于10，小于100
     }
 
-
-
     /**
      * LPower和RPower的正负决定左轮和右轮的正转和反转。
      * .----------------------------------.
@@ -123,6 +122,4 @@ public class WheelUnity {
             bool = bl> 0 ?BL.forward():bl==0?BL.stop():BL.back();
         }
     }
-
-
 }
