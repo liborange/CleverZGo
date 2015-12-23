@@ -1,6 +1,8 @@
 package top.liborange.gpio;
 
 import top.liborange.Config;
+import top.liborange.connection.CmdServiceImpl;
+import top.liborange.connection.RpcFramework;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -85,7 +87,6 @@ public class Contrller {
         while(flag){
             char command = buffReader.readLine().toCharArray()[0];
             switch (command){
-                cxchong
                 case 'w':
                     System.out.println("command: " + command + " 小车前进");
                     wheels.run(Config.CMD.forward);
@@ -119,11 +120,19 @@ public class Contrller {
         }
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void  app() throws Exception {
+        CarUnity car = new CarUnity(Config.Method.pwd);
+        CmdServiceImpl carService = new CmdServiceImpl(car);
+        RpcFramework.export(carService,50001);
+    }
+    public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("输入运行模式，1：普通；2：pwm；3：demo");
+        System.out.println("输入运行模式，0：app控制；1：普通；2：pwm；3：demo");
         int i = scanner.nextInt();
         switch (i){
+            case 0:
+                app();
+                break;
             case 1:
                 normal();
                 break;
