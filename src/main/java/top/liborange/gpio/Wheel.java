@@ -23,6 +23,9 @@ public class Wheel {
         pwm = true;
         SoftPwm.softPwmCreate(f, 0, 100);
         SoftPwm.softPwmCreate(b, 0, 100);
+        SoftPwm.softPwmWrite(f, 10);
+        SoftPwm.softPwmWrite(b,10);
+        System.out.println("wheel control pin: "+f+"\t"+b+"methos pwm "+pwm);
     }
 
     /**
@@ -74,6 +77,7 @@ public class Wheel {
      */
     public void pwmSetting(int fpower,int bpower) {
         if (pwm) {
+            System.out.println("power: "+fpower+" "+bpower);
             SoftPwm.softPwmWrite(b, bpower);
             SoftPwm.softPwmWrite(f, fpower);
         }

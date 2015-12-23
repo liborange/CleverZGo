@@ -34,7 +34,6 @@ public class WheelUnity {
     }
 
     public boolean run(Config.CMD cmd){
-        System.out.println("run command"+cmd);
         switch (cmd){
             case forward:
                 turnAround(power,power,power,power);

@@ -125,6 +125,7 @@ public class Contrller {
         CmdServiceImpl carService = new CmdServiceImpl(car);
         RpcFramework.export(carService,50001);
     }
+
     public static void main(String[] args) throws Exception {
         Scanner scanner = new Scanner(System.in);
         System.out.println("输入运行模式，0：app控制；1：普通；2：pwm；3：demo");
