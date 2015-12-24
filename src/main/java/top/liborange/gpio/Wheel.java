@@ -27,6 +27,7 @@ public class Wheel {
         SoftPwm.softPwmCreate(b, 0, 100);
         SoftPwm.softPwmWrite(f, 0);
         SoftPwm.softPwmWrite(b, 0);
+
     }
 
     /**
@@ -78,7 +79,7 @@ public class Wheel {
      */
     public void pwmSetting(int fpower,int bpower) {
         if (pwm) {
-            System.out.println("power: "+fpower+" "+bpower);
+
             SoftPwm.softPwmWrite(b, bpower);
             SoftPwm.softPwmWrite(f, fpower);
         }
