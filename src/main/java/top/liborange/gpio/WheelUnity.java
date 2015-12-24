@@ -108,7 +108,7 @@ public class WheelUnity {
      * @param fl
      * @param bl
      */
-    private void turnAround(int fr,int br,int fl, int bl){
+    public void turnAround(int fr,int br,int fl, int bl){
         if(pwm) {
             FL.move(fl);
             FR.move(fr);
